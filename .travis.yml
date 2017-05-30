@@ -4,4 +4,4 @@ services:
   - docker
 
 script: 
-  - docker-compose run --rm -e KBC_DATADIR=/src/test/data/ --entrypoint python tests -m unittest discover
+  - docker-compose run --rm tests

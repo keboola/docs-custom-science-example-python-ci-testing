@@ -6,5 +6,8 @@ services:
     tty: true
     stdin_open: true
     working_dir: /src/
+    command: python -m unittest discover
     volumes:
       - ./:/src/
+    environment:
+      - KBC_DATADIR=/src/test/data/
