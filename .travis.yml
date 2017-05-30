@@ -3,10 +3,5 @@ sudo: required
 services:
   - docker
 
-before_script:
-  - docker -v
-  - docker-compose -v
-  - docker-compose build tests
-
-script:
-  - docker-compose run --rm -e KBC_DATADIR=/src/test/data/ tests
+script: 
+  - docker-compose run --rm -e KBC_DATADIR=/src/test/data/ --entrypoint python tests -m unittest discover

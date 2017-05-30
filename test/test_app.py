@@ -1,11 +1,12 @@
 import sample_application
 import os
 import csv
+import unittest
 from keboola import docker
 
-
-class TestSampleApplication:
+class TestSampleApplication(unittest.TestCase):
     def test_sample_application(self):
+        os.chdir(os.environ['KBC_DATADIR'])
         cfg = docker.Config()
         app = sample_application.SampleApplication()
         app.run()
@@ -18,10 +19,10 @@ class TestSampleApplication:
         ]
 
         result_data = []
-        assert(os.path.isfile(cfg.get_data_dir() + 'out/tables/destination.csv'))
+        self.assertTrue(os.path.isfile(cfg.get_data_dir() + 'out/tables/destination.csv'))
         with open(cfg.get_data_dir() + 'out/tables/destination.csv', 'rt') as sample:
             csv_reader = csv.DictReader(sample, delimiter=',', quotechar='"')
             for row in csv_reader:
                 result_data.append(row)
 
-        assert(sample_data == result_data)
+        self.assertEqual(sample_data, result_data)
