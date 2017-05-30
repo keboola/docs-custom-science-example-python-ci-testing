@@ -6,7 +6,6 @@ from keboola import docker
 
 class TestSampleApplication(unittest.TestCase):
     def test_sample_application(self):
-        os.chdir(os.environ['KBC_DATADIR'])
         cfg = docker.Config()
         app = sample_application.SampleApplication()
         app.run()

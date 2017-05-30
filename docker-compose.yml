@@ -5,9 +5,10 @@ services:
     image: quay.io/keboola/docker-custom-python:latest
     tty: true
     stdin_open: true
-    working_dir: /src/
-    command: python -m unittest discover
+    working_dir: /data/
+    command: python -m unittest discover -s /src/
     volumes:
       - ./:/src/
+      - ./test/data/:/data/
     environment:
       - KBC_DATADIR=/src/test/data/
